@@ -1,3 +1,27 @@
-<p>
-  post-list-item works!
-</p>
+<li [ngClass]="{'list-group-item': true,
+                'list-group-item-success': isLoved(),
+                'list-group-item-danger': isNotLoved()}">
+  <article>
+    <div style="text-align:right">
+      <label style="color:black;font-size:small;text-align:right;vertical-align:top">
+        {{PostItem.Created_at | date: 'E dd.MM.y, H:mm:ss' | uppercase}}
+      </label>
+    </div>
+    <h4 style="font-size:24px;font-weight:bold;text-align:left">
+      {{PostItem.Title}}
+    </h4>
+    <textarea readonly rows="4" cols="80" style="border:none;resize:none;background:inherit">{{PostItem.Content}}</textarea>
+  </article>
+  <div style="text-align:center">
+    <button class="btn btn-success"
+            (click)="PostItem.increase()"
+            style="background-color:darkgreen;color:white">
+      <b *ngIf="isLoved()">{{PostItem.LoveIts}}</b> Love it!
+    </button>
+    <button class="btn btn-success"
+            (click)="PostItem.decrease()"
+            style="background-color:darkred;color:white">
+      <b *ngIf="isNotLoved()">{{PostItem.LoveIts * (-1)}}</b> Dont love it!
+    </button>
+  </div>
+</li>
