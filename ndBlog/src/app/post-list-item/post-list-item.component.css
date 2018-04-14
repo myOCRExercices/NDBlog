@@ -1,0 +1,22 @@
+.articleItem {
+  margin-top: 10px;
+}
+
+.articleContent {
+  background: inherit;
+}
+
+.date {
+  background: inherit;
+  border:double;
+  color: blue;
+  font-weight: bold;
+  font-size: smaller;
+  text-align: right;
+  vertical-align: top
+}
+
+.title {
+  font-weight: bold;
+  font-size: x-large;
+}
