@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IPost, Post } from '../classes/Post';
+import { IPost, Post } from './models/Post';
 import * as firebase from 'firebase';
 
 @Component({
