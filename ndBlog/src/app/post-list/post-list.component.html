@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <app-post-list-item *ngFor="let post of PostList"
+  <app-post-list-item *ngFor="let post of PostList; let i = index"
                       [PostItem]="post"
                       >Loading post list item component...</app-post-list-item>
 </ul>

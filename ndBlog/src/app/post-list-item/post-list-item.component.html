@@ -10,16 +10,21 @@
       <div class="col-12">
         <p class="article, articlContent">{{PostItem.Content}}</p>
       </div>
-      <div style="text-align:center">
+      <div class="row, col-12 offset-12" style="text-align:left">
         <button class="btn btn-success"
-                (click)="PostItem.increase()"
+                (click)="onIncrease()"
                 style="background-color:darkgreen;color:white">
           <b *ngIf="isLoved()">{{PostItem.LoveIts}}</b> Love it!
         </button>
         <button class="btn btn-success"
-                (click)="PostItem.decrease()"
+                (click)="onDecrease()"
                 style="background-color:darkred;color:white">
           <b *ngIf="isNotLoved()">{{PostItem.LoveIts * (-1)}}</b> Dont love it!
+        </button>
+        <button class="offset-8 col-1,btn btn-default"
+                (click)="onDeletePost(post)"
+                style="background-color:darkred;color:white">
+          Delete
         </button>
       </div>
     </div>
