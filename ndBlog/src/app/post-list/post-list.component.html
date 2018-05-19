@@ -1,5 +1,14 @@
+<label for="postSelectSort">Sort by:</label>
+<select id="postSelectSort" class="selectpicker" (change)="selectChange($event.target.value)">
+  <option value="0">Date ascend</option>
+  <option selected value="1">Date descend</option>
+  <option value="2">Like ascend</option>
+  <option value="3">Like descend</option>
+  <option value="4">Title ascend</option>
+  <option value="5">Title descend</option>
+</select>
 <ul class="list-group">
-  <app-post-list-item *ngFor="let post of PostList"
+  <app-post-list-item *ngFor="let post of PostList; let i = index"
                       [PostItem]="post"
                       >Loading post list item component...</app-post-list-item>
 </ul>
