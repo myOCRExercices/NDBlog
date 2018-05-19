@@ -1,5 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { IPost, Post } from '../../classes/Post';
+import { IPost } from '../models/Post';
+import { PostsService } from '../services/posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list-item',
@@ -8,20 +10,48 @@ import { IPost, Post } from '../../classes/Post';
 })
 export class PostListItemComponent implements OnInit {
 
+  /**
+   * The post item.
+  **/
   @Input() PostItem: IPost;
 
-  constructor() {
-    this.PostItem = new Post();
-  }
+  constructor(private postsService: PostsService, private router: Router) { }
 
   ngOnInit() {
   }
 
+  /**
+   * Checks if the post is loved.
+  **/
   isLoved() {
     return this.PostItem.LoveIts > 0;
   }
 
+  /**
+   * Checks if the post is not loved.
+  **/
   isNotLoved() {
     return this.PostItem.LoveIts < 0;
+  }
+
+  /**
+   * Occurs by decreasing of love.
+  **/
+  onDecrease() {
+    this.postsService.DecreaseLove(this.PostItem);
+  }
+
+  /**
+   * Occurs by deleting of post.
+  **/
+  onDeletePost(post: IPost) {
+    this.postsService.Remove(post);
+  }
+
+  /**
+   * Occurs by increasing of love.
+  **/
+  onIncrease() {
+    this.postsService.IncreaseLove(this.PostItem);
   }
 }
