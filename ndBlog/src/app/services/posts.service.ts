@@ -23,7 +23,6 @@ export class PostsService {
   Add(post: IPost) {
     this.Posts.push(post);
     this.Save();
-    this.Emit();
   }
 
   /**
@@ -37,7 +36,6 @@ export class PostsService {
       }
     });
     this.Save();
-    this.Emit();
   }
 
   /**
@@ -54,7 +52,6 @@ export class PostsService {
     firebase.database().ref('/posts').on('value', (data) => {
       this.Posts = data.val() ? data.val() : [];
       this.Sort(this.lastSortIndex);
-      this.Emit();
     })
   }
 
@@ -69,7 +66,6 @@ export class PostsService {
       }
     });
     this.Save();
-    this.Emit();
   }
 
   /**
@@ -83,7 +79,6 @@ export class PostsService {
     });
     this.Posts.splice(postIndexToRemove, 1);
     this.Save();
-    this.Emit();
   }
 
   /**
@@ -94,8 +89,10 @@ export class PostsService {
     this.Sort(this.lastSortIndex);
   }
 
+  /**
+   * sorts the posts list by index of select.
+  **/
   Sort(sortIndex) {
-    console.log(sortIndex);
     switch (sortIndex) {
       case "0":
         this.Posts.sort((post1, post2) => {
@@ -134,7 +131,7 @@ export class PostsService {
           return (post1.Title < post2.Title) ? -1 : (post1.Title > post2.Title) ? 1 : 0;
         });
     }
+    this.lastSortIndex = sortIndex;
     this.Emit();
   }
-
 }
