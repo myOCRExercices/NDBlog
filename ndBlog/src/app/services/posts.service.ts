@@ -13,6 +13,8 @@ export class PostsService {
 
   PostsSubject = new Subject<IPost[]>();
 
+  private lastSortIndex: number = 1;
+
   constructor() { }
 
   /**
@@ -51,6 +53,7 @@ export class PostsService {
   Get() {
     firebase.database().ref('/posts').on('value', (data) => {
       this.Posts = data.val() ? data.val() : [];
+      this.Sort(this.lastSortIndex);
       this.Emit();
     })
   }
@@ -88,6 +91,50 @@ export class PostsService {
   **/
   Save() {
     firebase.database().ref('/posts').set(this.Posts);
+    this.Sort(this.lastSortIndex);
+  }
+
+  Sort(sortIndex) {
+    console.log(sortIndex);
+    switch (sortIndex) {
+      case "0":
+        this.Posts.sort((post1, post2) => {
+          return (Date.parse(post1.Created_at) < Date.parse(post2.Created_at)) ? -1 :
+            (Date.parse(post1.Created_at) > Date.parse(post2.Created_at)) ? 1 : 0;
+        });
+        break;
+      case "1":
+        this.Posts.sort((post1, post2) => {
+          return (Date.parse(post1.Created_at) < Date.parse(post2.Created_at)) ? 1 :
+            (Date.parse(post1.Created_at) > Date.parse(post2.Created_at)) ? -1 : 0;
+        });
+        break;
+      case "2":
+        this.Posts.sort((post1, post2) => {
+          return (post1.LoveIts < post2.LoveIts) ? -1 : (post1.LoveIts > post2.LoveIts) ? 1 : 0;
+        });
+        break;
+      case "3":
+        this.Posts.sort((post1, post2) => {
+          return (post1.LoveIts < post2.LoveIts) ? 1 : (post1.LoveIts > post2.LoveIts) ? -1 : 0;
+        });
+        break;
+      case "4":
+        this.Posts.sort((post1, post2) => {
+          return (post1.Title < post2.Title) ? -1 : (post1.Title > post2.Title) ? 1 : 0;
+        });
+        break;
+      case "5":
+        this.Posts.sort((post1, post2) => {
+          return (post1.Title < post2.Title) ? 1 : (post1.Title > post2.Title) ? -1 : 0;
+        });
+        break;
+      default:
+        this.Posts.sort((post1, post2) => {
+          return (post1.Title < post2.Title) ? -1 : (post1.Title > post2.Title) ? 1 : 0;
+        });
+    }
+    this.Emit();
   }
 
 }

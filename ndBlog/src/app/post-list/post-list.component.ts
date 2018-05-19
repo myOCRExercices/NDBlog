@@ -3,6 +3,7 @@ import { IPost } from '../models/Post';
 import { Subscription } from 'rxjs/Subscription';
 import { PostsService } from '../services/posts.service';
 import { Router } from '@angular/router';
+import { SelectControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-post-list',
@@ -17,7 +18,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   PostList: IPost[];
 
   postSubscription: Subscription;
-
+  
   constructor(private postsService: PostsService, private router: Router) { }
 
   ngOnInit() {
@@ -27,9 +28,12 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsService.Get();
     this.postsService.Emit();
   }
-  
+
   ngOnDestroy() {
     this.postSubscription.unsubscribe();
   }
 
+  selectChange(indexValue) {
+    this.postsService.Sort(indexValue);
+  }
 }
