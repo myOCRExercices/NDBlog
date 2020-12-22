@@ -7,6 +7,7 @@ You can also sort posts by title, date or like. And all this in ascending or des
 Installation:
 - download or clone the project
 - at the root of the directory, execute: "npm install" to install all necessary modules to the functioning of the blog
+- update angular: "ng update @angular/cli @angular/core --force"
 - start the web server of the blog with "ng serve".
 
 And here it is, the blog is available on "http: // localhost: 4200". To change port: "ng serve --port numberPort".
