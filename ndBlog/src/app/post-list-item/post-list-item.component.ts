@@ -44,8 +44,8 @@ export class PostListItemComponent implements OnInit {
   /**
    * Occurs by deleting of post.
   **/
-  onDeletePost(post: IPost) {
-    this.postsService.Remove(post);
+  onDeletePost() {
+    this.postsService.Remove(this.PostItem);
   }
 
   /**
